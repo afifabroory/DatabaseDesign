@@ -1,7 +1,4 @@
 <div class="book-summary">
-    <div id="book-search-input" role="search">
-        <input type="text" placeholder="Type to search" />
-    </div>
     <nav role="navigation">
         <ul class="summary">
             {% if page.url == "/index.html" or page.url == "/" %}
@@ -9,44 +6,39 @@
             {% else %}
             <li class="chapter" data-level="1.1" data-path="{{site.baseurl}}">
             {% endif %}
-                <a href="{{site.baseurl}}">
-                    {{ site.title | escape }}
-                </a>
+                <h3 style="margin:0"><a href="{{site.baseurl}}">{{ site.title | escape }}</a></h3>
             </li>
 
             <li class="divider"></li>
 
             <!-- search link -->
             <li><a href="{{site.baseurl}}/search">Search</a></li>
+            
 
-            <li class="divider"></li>
-
-            {% assign reversed_posts = site.posts | reverse %}
-
-            {% for post in reversed_posts %}
-                {% if page.url == post.url %}
-                <li class="chapter active" data-level="1.2" data-path="{{site.baseurl}}{{post.url}}">
-                {% else %}
-                <li class="chapter" data-level="1.1" data-path="{{site.baseurl}}{{post.url}}">
-                {% endif %}
-                    <a href="{{site.baseurl}}{{post.url}}">
-                        {{ post.title | escape }}
-                    </a>
-                    {% if site.toc.enabled %}
+            {% for category in site.categories %}
+                {% capture category_name %}{{ category | reverse }}{% endcapture %}
+                {% if category_name != "Jekyll" %} 
+                    <li class="chapter-title">{{ category_name }}</li>
+                    {% assign reversed_postsss = site.categories[category_name] | reverse %}
+                    {% for post in reversed_postsss %}
                         {% if page.url == post.url %}
-                            {% include toc.html html=content h_min=site.toc.h_min h_max=site.toc.h_max %}
+                        <li class="chapter active" data-level="1.2" data-path="{{site.baseurl}}{{post.url}}">
+                        {% else %}
+                        <li class="chapter" data-level="1.1" data-path="{{site.baseurl}}{{post.url}}">
                         {% endif %}
-                    {% endif %}
-                </li>
+                            <a href="{{site.baseurl}}{{post.url}}">
+                                {{ post.title | escape }}
+                            </a>
+                            {% if site.toc.enabled %}
+                                {% if page.url == post.url %}
+                                    {% include toc.html html=content h_min=site.toc.h_min h_max=site.toc.h_max %}
+                                {% endif %}
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                {% endif %}
+                <li class="divider"></li>
             {% endfor %}
-
-            <li class="divider"></li>
-
-            <li>
-                <a href="https://github.com/sighingnow/jekyll-gitbook/fork" target="blank" class="gitbook-link">
-                    Fork it Now!
-                </a>
-            </li>
         </ul>
     </nav>
 </div>
