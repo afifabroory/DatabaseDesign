@@ -1,16 +1,16 @@
 # Configurations
-title:            Jekyll Gitbook
-longtitle:        Jekyll Gitbook
-author:           HE Tao
-email:            sighingnow@gmail.com
+title:            Database Design
+longtitle:        Database Design Project
+author:           Muhammad Afif Abroory
+email:            afifabroory@gmail.com
 description: >
-  Build Jekyll site with the GitBook style.
+  My Database Design Project Collection
 
 version:          1.0
 gitbook_version:  3.2.3
 
-url:              'https://sighingnow.github.io'
-baseurl:          '/jekyll-gitbook'
+url:              'https://afifabroory.github.io'
+baseurl:          '/DatabaseDesign'
 rss:              RSS
 
 toc:
